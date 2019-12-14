@@ -41,7 +41,7 @@ def main(argv):
         try:
             opts, args = getopt.getopt(argv,"d:m:u:p:",["datetime=","mass=","user=","password="])
         except getopt.GetoptError:
-                print 'setpersonal.py -d "<datetime>" -m <mass> -u <user> -p <password>'
+                print('setpersonal.py -d "<datetime>" -m <mass> -u <user> -p <password>')
                 sys.exit(2)       
         
     

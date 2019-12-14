@@ -145,8 +145,8 @@ def proc_finally_exc(context):
 def proc_finally(context):
 #        print log.syslog.read()
 #        print log.funlog.read()
-        print(context.syslog().read())
-        print(context.funlog().read())
+#        print(context.syslog().read())
+#        print(context.funlog().read())
         log.syslog.close()        
 
 class mContext:

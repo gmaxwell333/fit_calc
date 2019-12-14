@@ -176,14 +176,14 @@ def plan2csv(plan_text, profiles_txt, context, act_id_suffix=""):
       #                          print zone
                                 pace=prof.get_pace_by_zone(zone)
                                 if not pace: 
-                                    print "no pace for zone "+zone+" found in profile: "+ prof.profile_date +"/"+discipline
+                                    print("no pace for zone "+zone+" found in profile: "+ prof.profile_date +"/"+discipline)
                                     return None
                           # print pace                      
                             
                             if discipline=='Running': 
                                 segspeed=1/ut.hourmin_km2sec_m(pace)
                             if discipline=='Swimming':                             
-                                print pace
+                                print(pace)
                                 segspeed=1/ut.hourmin_100m2sec_m(pace)
 #                        
                             
@@ -318,7 +318,7 @@ def plan2csv(plan_text, profiles_txt, context, act_id_suffix=""):
               #      print "cduration: ", cduration
               #      print "cdistance: ", cdistance
             else:
-                print "avtivity description error: "+base_line
+                print("avtivity description error: "+base_line)
          
  
     
@@ -592,7 +592,7 @@ class SportProfiles(ut.mBase):
          dates=self.get_profiles_dates()
          
          if not dates : 
-             print "No profiles defined"
+             print("No profiles defined")
              return False
 
          dates.sort(key=ut.strYmd2datetime, reverse=True)
@@ -614,7 +614,7 @@ class SportProfiles(ut.mBase):
          
     def get_selected_profile(self):
         if self.profile_date==None: 
-            print "No profile selected"
+            print("No profile selected")
             return None
         return self.profiles[self.profile_date]
     
