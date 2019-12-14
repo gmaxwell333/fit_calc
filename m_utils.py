@@ -30,14 +30,14 @@ def hourmin2sec(hm):
     match=re.search("^([0-9]?[0-9]?[0-9]):([0-5][0-9])$", hm)    
     #match=re.search("^(0[0-9]|1[0-9]|2[0-3]|[0-9]):([0-5][0-9])$", hm)
     if match==None:
-        raise Exception("Invalid hh:mm format: "+ hm)    
+        raise(Exception("Invalid hh:mm format: "+ hm))
     return int(match.group(1))*60+int(match.group(2));
 
 def hourHmin2sec(hm):
     match=re.search("^([0-9]?[0-9])h([0-5][0-9])$", hm)    
         #match=re.search("^(0[0-9]|1[0-9]|2[0-3]|[0-9]):([0-5][0-9])$", hm)
     if match==None:
-        raise Exception("Invalid hh:mm format: "+ hm)    
+        raise(Exception("Invalid hh:mm format: "+ hm))
     return int(match.group(1))*3600+int(match.group(2))*60;
 
 

@@ -218,11 +218,11 @@ def plan2csv(plan_text, profiles_txt, context, act_id_suffix=""):
                                 if not hr:
                                     msg="no pace for zone "+zone+" found in profile: "+ prof.profile_date +"/"+discipline+", "+base_line
                                     context.funlog().logger.error(msg)
-                                    raise Exception(msg), None,  sys.exc_info()[2]
+                                    raise(Exception(msg), None,  sys.exc_info()[2])
                             elif seg["pace"]:
                                 msg="segment pace definition not allowed for, only zone/time allowed, "+base_line
                                 context.funlog().logger.error(msg)
-                                raise Exception(msg), None,  sys.exc_info()[2]
+                                raise(Exception(msg), None,  sys.exc_info()[2])
                             
                             #desingate segtime
                             segtime=None
@@ -233,13 +233,13 @@ def plan2csv(plan_text, profiles_txt, context, act_id_suffix=""):
                             elif seg["segdist"]: 
                                 msg="segment dist definition not allowed, only zone/time allowed, "+base_line
                                 context.funlog().logger.error(msg)
-                                raise Exception(msg), None,  sys.exc_info()[2]
+                                raise(Exception(msg), None,  sys.exc_info()[2])
                             
 
                             if hr==None or segtime==None:
                                 msg="segment zone/time definition not found "+base_line
                                 context.funlog().logger.error(msg)
-                                raise Exception(msg), None,  sys.exc_info()[2]
+                                raise(Exception(msg), None,  sys.exc_info()[2])
                     
                             total_segtime=total_segtime+segtime                            
                                                                                                              
@@ -286,7 +286,7 @@ def plan2csv(plan_text, profiles_txt, context, act_id_suffix=""):
                         if discipline!='Running' and discipline!='Swimming':
                             msg="total duration not allowed for "+discipline+", "+base_line
                             context.funlog().logger.error(msg)
-                            raise Exception(msg), None,  sys.exc_info()[2]
+                            raise(Exception(msg), None,  sys.exc_info()[2])
                             
                         cdistance=distance-total_segdist    
                         if cdistance<0: cdistance=0
@@ -554,11 +554,11 @@ class SportProfiles(ut.mBase):
             self.reset();     
             if filename:self.loadfromfile(filename)
             elif text: self.loadfromtxt(text)
-            else: raise Exception("Nor filename, neither text defined ")                    
+            else: raise(Exception("Nor filename, neither text defined "))
         except Exception as e:
             self.funlog().logger.error(e.message)
             self.funlog().logger.error("Profiles data corrupted")
-            raise e, None, sys.exc_info()[2]
+            raise(e, None, sys.exc_info()[2])
    
 
         
@@ -608,7 +608,7 @@ class SportProfiles(ut.mBase):
     def select_discipline(self,discipline):
         profile=self.get_selected_profile()        
         if not discipline in profile:            
-            raise Exception("error: Discipline "+discipline+" in profile "+self.profile_date+" not found")            
+            raise(Exception("error: Discipline "+discipline+" in profile "+self.profile_date+" not found"))
         self.discipline=discipline         
         return True
          
@@ -623,7 +623,7 @@ class SportProfiles(ut.mBase):
         pace=self.get_base("pace");
         if not pace: return None
         if not "rtp" in pace:
-            raise Exception("rtp field not found in profile "+self.profile_date+"/"+self.discipline+"/pace")            
+            raise(Exception("rtp field not found in profile "+self.profile_date+"/"+self.discipline+"/pace"))
         return pace["rtp"]
     
     def get_stp(self):      
@@ -632,7 +632,7 @@ class SportProfiles(ut.mBase):
         if not "stp" in pace:
             msg="stp field not found in profile "+self.profile_date+"/"+self.discipline+"/pace"
             self.funlog().logger.error(msg)
-            raise Exception(msg), None,  sys.exc_info()[2]
+            raise(Exception(msg), None,  sys.exc_info()[2])
         return pace["stp"]    
     
     def get_rtp_sec(self):        
@@ -645,7 +645,7 @@ class SportProfiles(ut.mBase):
         hr=self.get_base("hr")
         if not hr: return None
         if not "hrt" in hr:
-            raise Exception("hrt field not found in profile "+self.profile_date+"/"+self.discipline+"/hr")            
+            raise(Exception("hrt field not found in profile "+self.profile_date+"/"+self.discipline+"/hr"))
         return int(hr["hrt"])
     
     def get_ftp(self):
@@ -653,7 +653,7 @@ class SportProfiles(ut.mBase):
         if not power: return None
 
         if not "ftp" in power:
-            raise Exception("ftp field not found in profile "+self.profile_date+"/"+self.discipline+"/ftp")            
+            raise(Exception("ftp field not found in profile "+self.profile_date+"/"+self.discipline+"/ftp"))
         return int(power["ftp"])
     
     
@@ -663,7 +663,7 @@ class SportProfiles(ut.mBase):
         base=discipline[base_name]        
         if not "par_name" in base:
             if obligatory:
-                raise Exception(par_name+" field not found in profile "+self.profile_date+"/"+self.discipline+"/"+base_name)      
+                raise(Exception(par_name+" field not found in profile "+self.profile_date+"/"+self.discipline+"/"+base_name))
             else: return None
         return base[par_name];    
     
@@ -671,7 +671,7 @@ class SportProfiles(ut.mBase):
         discipline=self.get_selected_discipline()   
         if not base_name in discipline: 
             if obligatory:
-                raise Exception(base_name+" field not found in profile "+self.profile_date+"/"+self.discipline+"/"+base_name)
+                raise(Exception(base_name+" field not found in profile "+self.profile_date+"/"+self.discipline+"/"+base_name))
             else: return None        
         base=discipline[base_name]        
         return base
@@ -1016,7 +1016,7 @@ class SportSummarize(ut.mBase):
               if key_string: ks=key_string
               else: ks=""
               self.funlog().logger.info("Activity "+ks+" process error")
-              raise e, None, sys.exc_info()[2]
+              raise(e, None, sys.exc_info()[2])
                               
         if key_string: self.funlog().logger.info("The activity " + key_string + " processed")
         self.summ=summ;                            
@@ -1158,7 +1158,7 @@ class SportSummarize(ut.mBase):
             self.funlog().logger.error("persist sql error")            
             self.lowdb.rollback()
             self.lowdb.autocommit_on()            
-            raise e, None, sys.exc_info()[2]
+            raise(e, None, sys.exc_info()[2])
                                         
         self.lowdb.commit()      
         self.lowdb.autocommit_on()      

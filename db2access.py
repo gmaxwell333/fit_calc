@@ -39,7 +39,7 @@ def init(context):
             db=ibm_db.connect("DATABASE=BLUDB;HOSTNAME=dashdb-txn-sbox-yp-lon02-02.services.eu-gb.bluemix.net;PORT=50000;PROTOCOL=TCPIP;UID=dwg06302;PWD=8f+pmtbxknntg59p", "", "")
     except Exception as e:
         context.funlog().logger.error("db connection error")
-        raise e, None, sys.exc_info()[2]
+        raise(e, None, sys.exc_info()[2])
         
     return True
 
@@ -68,7 +68,7 @@ class lowDBAccess(ut.mBase):
             return stmt
         except Exception as e: 
             self.funlog().logger.error("database error")
-            raise e, None, sys.exc_info()[2]
+            raise(e, None, sys.exc_info()[2])
             
             
     def execute_sql_stmt(self,sql):       # results: stmt; None: error; Exception: error
@@ -81,7 +81,7 @@ class lowDBAccess(ut.mBase):
             else: return None
         except Exception as e: 
             self.funlog().logger.error("database error")
-            raise e, None, sys.exc_info()[2]
+            raise(e, None, sys.exc_info()[2])
     
     def autocommit_off(self):
         self.isautapp()
