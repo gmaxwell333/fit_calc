@@ -136,16 +136,17 @@ def proc_finally_exc(context):
  #         log.syslog.logger.error(s.getvalue())
  #         log.syslog.logger.error("error: see log")
           
-          s=StringIO()  
-          exc_type, exc_value, exc_traceback = sys.exc_info()
-          traceback.print_exc(file=s)
-          context.syslog().logger.error(s.getvalue())
-   #       context.syslog().logger.error("error: see log")
+#          s=StringIO()  
+#          exc_type, exc_value, exc_traceback = sys.exc_info()
+#          traceback.print_exc(file=s)
+          context.syslog().logger.error(s.getvalue())          
+          context.syslog().logger.error("error: see log")
+          print(context.syslog().read())
        
 def proc_finally(context):
 #        print log.syslog.read()
 #        print log.funlog.read()
-        print(context.syslog().read())
+       # print(context.syslog().read())
         print(context.funlog().read())
         log.syslog.close()        
 
