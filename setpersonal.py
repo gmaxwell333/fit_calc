@@ -12,6 +12,7 @@ import m_logger as log
 import db2access as db    
 import m_utils as ut
 
+
 def setpersonal(date_time, data, user,password,context):
     
     dbobj=sp.dbAccess()             
@@ -27,11 +28,11 @@ def setpersonal(date_time, data, user,password,context):
 
     
 def main(argv):   
-    
+   result=0 
 #   print('starting...')
    log.init("setpersonal")      
    context=ut.mContext()      
-   result=0        
+          
     
    try:    
         user=""
@@ -76,4 +77,7 @@ def main(argv):
    return result         
     
 if __name__ == "__main__":
-   main(sys.argv[1:])
+
+   result=main(sys.argv[1:])
+   
+   sys.exit(result)
