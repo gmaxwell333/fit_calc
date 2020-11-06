@@ -36,7 +36,7 @@ def init(context):
     global db
     try:
       if not db:
-            db=ibm_db.connect("DATABASE=BLUDB;HOSTNAME=dashdb-txn-sbox-yp-lon02-02.services.eu-gb.bluemix.net;PORT=50000;PROTOCOL=TCPIP;UID=dwg06302;PWD=8f+pmtbxknntg59p", "", "")
+            db=ibm_db.connect("DATABASE=BLUDB;HOSTNAME=dashdb-txn-sbox-yp-lon02-06.services.eu-gb.bluemix.net;PORT=50001;PROTOCOL=TCPIP;UID=dvz27320;PWD=f1ljd1j0t^rln4b0;Security=SSL;", "", "")
     except Exception as e:
         context.funlog().logger.error("db connection error")
         raise(e, None, sys.exc_info()[2])
